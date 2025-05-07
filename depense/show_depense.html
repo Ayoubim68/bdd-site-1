@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les dépenses</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Liste des Dépenses</h1>
+<a href="{{ url_for('add_depense') }}" class="btn btn-add">Ajouter une dépense</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>destinataire Depense</th>
+                <th>Description</th>
+                <th>Montant</th>
+                <th>Date</th>
+                <th>Catégorie</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if depenses %}
+            {% for depense in depenses %}
+                <tr>
+
+                    <td>{{ depense.id }}</td>
+                    <td>{{depense.destinataireDepense}}</td>
+                    <td>{{ depense.description }}</td>
+                    <td>{{ depense.montant }} €</td>
+                    <td>{{ depense.date_depense }}</td>
+                    <td>{{ depense.categorieDepense_id }}</td>
+<td>
+    <img src="{% if 'img_depense_1' in depense.image %}https://hebbkx1anhila5yf.public.blob.vercel-storage.com/img_depense_1-YlI3ZK13QiT6Jwl55nyXksJoyykGHH.png
+             {% elif 'img_depense_2' in depense.image %}https://hebbkx1anhila5yf.public.blob.vercel-storage.com/img_depense_2-fXlizU1daUn9ZPfdS1ivwadfiHbm6Y.png
+             {% elif 'img_depense_3' in depense.image %}https://hebbkx1anhila5yf.public.blob.vercel-storage.com/img_depense_3-aBeEMG8Z7pTkoBvqqoAelh1ZxpZUmt.png
+             {% elif 'img_depense_4' in depense.image %}https://hebbkx1anhila5yf.public.blob.vercel-storage.com/img_depense_4-CLhoO0VV6COGA4jrJJHeorqveDMCwB.png
+             {% elif 'img_depense_5' in depense.image %}https://hebbkx1anhila5yf.public.blob.vercel-storage.com/img_depense_5-fraupvKyaKGRaTpocg2UVjqzBtoNcr.png
+             {% elif 'img_depense_6' in depense.image %}https://hebbkx1anhila5yf.public.blob.vercel-storage.com/img_depense_6-rDyElL7xi4A0dH47L9XxZR7UvTcioX.png
+             {% else %}{{ url_for('static', filename='images/' + depense.image) }}{% endif %}"
+         alt="{{ depense.description }}" width="100" height="100" style="object-fit: contain;">
+</td>
+                    <td>
+                        <a href="{{ url_for('edit_depense', id=depense.id) }}" class="btn btn-edit">Éditer</a>
+                        <a href="{{ url_for('delete_depense', id=depense.id) }}" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette dépense ?');">Supprimer</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune dépense enregistrée.</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

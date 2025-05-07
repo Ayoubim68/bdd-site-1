@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier une catégorie de dépense</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Modifier une Catégorie de Dépense</h1>
+    <form method="post" action="{{ url_for('valid_edit_categorie_depense') }}">
+        <fieldset>
+            <legend>Modifier la Catégorie</legend>
+            <input type="hidden" name="id" value="{{ categorie.id }}">
+
+            <label for="libelleCategorie">Libellé :</label>
+            <input type="text" id="libelleCategorie" name="libelleCategorie" value="{{ categorie.libelleCategorie }}" required>
+
+            <label for="budget">Budget :</label>
+            <input type="text" id="budget" name="budget" value="{{ categorie.budget }}" required>
+
+            <input type="submit" value="Modifier la catégorie">
+        </fieldset>
+    </form>
+    <a href="{{ url_for('show_categorie_depense') }}" class="btn">Retour à la liste</a>
+{% endblock %}

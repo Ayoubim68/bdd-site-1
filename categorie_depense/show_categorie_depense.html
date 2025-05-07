@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les catégories de dépenses</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Liste des Catégories de Dépenses</h1>
+    <a href="{{ url_for('add_categorie_depense') }}" class="btn btn-add">Ajouter une catégorie</a>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Libellé Catégorie</th>
+                    <th>Budget</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if categories %}
+                {% for categorie in categories %}
+                    <tr>
+                        <td>{{ categorie.id }}</td>
+                        <td>{{ categorie.libelleCategorie }}</td>
+                        <td>{{ categorie.budget }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_categorie_depense', id=categorie.id) }}" class="btn btn-edit">Éditer</a>
+                            <a href="{{ url_for('delete_categorie_depense', id=categorie.id) }}" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucune catégorie de dépense enregistrée.</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

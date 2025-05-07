@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block title %}
+        <title>layout</title>
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" >
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" >
+    {% endblock %}
+</head>
+<body>
+{% include('_nav.html') %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% block body %}
+{% endblock %}
+{% block javascripts %}
+    <div class="accueil-container">
+        <p>Sujet 11 Dépense/Catégorie_dépense / Projet Flask / Chakiri Ayoub</p>
+    </div>
+{% endblock %}
+</body>
+</html>

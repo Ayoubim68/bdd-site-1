@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier une dépense</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Modifier une Dépense</h1>
+<form method="post" action="{{ url_for('valid_edit_depense') }}">
+    <fieldset>
+
+        <legend>Modifier la Dépense</legend>
+        <input type="hidden" name="id" value="{{ depense.id }}">
+
+        <label for="destinataireDepense">Destinataire :</label>
+        <input type="text" id="destinataireDepense" name="destinataireDepense" value="{{ depense.destinataireDepense }}" required>
+
+        <label for="montant">Montant (€) :</label>
+        <input type="number" id="montant" name="montant" step="0.01" value="{{ depense.montant }}" required>
+
+        <label for="description">Description :</label>
+        <input type="text" id="description" name="description" value="{{ depense.description }}" required>
+
+        <label for="date_depense">Date :</label>
+        <input type="date" id="date_depense" name="date_depense" value="{{ depense.date_depense }}" required>
+
+        <label for="categorieDepense_id">Catégorie :</label>
+        <select id="categorieDepense_id" name="categorieDepense_id" required>
+            {% for categorie in categories %}
+                <option value="{{ categorie.id }}" {% if categorie.id == depense.categorieDepense_id %}selected{% endif %}>
+                    {{ categorie.libelleCategorie }}
+                </option>
+            {% endfor %}
+        </select><br>
+
+
+        <label for="image">Image (nom du fichier)</label>
+        <input id="image" type="text" name="image" size="25" value="" placeholder="Entrer le nom du fichier image" required><br>
+
+        <input type="submit" value="Modifier la dépense">
+    </fieldset>
+</form>
+    <a href="{{ url_for('show_depense') }}" class="btn">Retour à la liste</a>
+{% endblock %}
